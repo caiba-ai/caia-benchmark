@@ -1,0 +1,10 @@
+[
+    {
+        "task_id": "df78208f-8cc3-4257-a07f-2d078ee1aa58",
+        "question": "Fetch Uniswap v3 ETH/USDC 24h swap volume on ETH."
+    },
+    {
+        "task_id": "b26f07df-7944-4c5a-bdcf-b5686c5ac67a",
+        "question": "Identify the top-3 gas-consuming contracts on Ethereum in the last 24 h."
+    }
+]

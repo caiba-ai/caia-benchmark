@@ -1,0 +1,76 @@
+[
+    {
+        "task_id": "df78208f-8cc3-4257-a07f-2d078ee1aa58",
+        "question": "Fetch Uniswap v3 ETH/USDC 24h swap volume on ETH.",
+        "level": 1,
+        "evaluate": {
+            "items": [
+                {
+                    "target": "ANSWER",
+                    "points": 1,
+                    "criteria": "Reference answer: $50,000,000 (example value). Should return the 24h swap volume in USD or equivalent, sourced from a reliable on-chain/off-chain data provider."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 1,
+                    "points": 2,
+                    "criteria": "Identify the correct Uniswap v3 ETH/USDC pool address on Ethereum (e.g., via Uniswap Analytics, Etherscan, or subgraph)."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 2,
+                    "points": 2,
+                    "criteria": "Use a blockchain explorer (e.g., Etherscan), subgraph, or DeFi API (e.g., Dune Analytics, The Graph, CoinGecko) to query swap events in the last 24 hours."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 3,
+                    "points": 1,
+                    "criteria": "Aggregate the volume of all swaps in the pool over 24h, converting ETH amounts to USDC/USD equivalent if necessary."
+                },
+                {
+                    "target": "TOOL_USE",
+                    "points": 4,
+                    "criteria": "Must use a tool that directly fetches on-chain data (e.g., Uniswap v3 subgraph, Dune Analytics SQL, Etherscan API). Input must include the pool address or token pair identifiers."
+                }
+            ]
+        }
+    },
+    {
+        "task_id": "b26f07df-7944-4c5a-bdcf-b5686c5ac67a",
+        "question": "Identify the top-3 gas-consuming contracts on Ethereum in the last 24 h.",
+        "level": 1,
+        "evaluate": {
+            "items": [
+                {
+                    "target": "ANSWER",
+                    "points": 1,
+                    "criteria": "Reference answer: ['0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 (WETH)', '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48 (USDC)', '0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT)']. Must return 3 contract addresses (or names) with gas consumption values, sourced from a reliable blockchain explorer or analytics platform."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 1,
+                    "points": 2,
+                    "criteria": "Identify a data source (e.g., Etherscan, Etherchain, Dune Analytics) that tracks gas usage by contract address over time."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 2,
+                    "points": 2,
+                    "criteria": "Extract all contract transactions within the 24-hour window and calculate total gas consumed per contract (gas used per transaction × gas price in ETH)."
+                },
+                {
+                    "target": "REASONING",
+                    "step": 3,
+                    "points": 2,
+                    "criteria": "Sort contracts by total gas consumption in ETH or USD and select the top 3."
+                },
+                {
+                    "target": "TOOL_USE",
+                    "points": 3,
+                    "criteria": "Must use a tool that provides per-contract gas metrics (e.g., Etherscan's gas tracker API, Dune Analytics query, Blockchain ETL datasets). Input must filter for contract addresses only (exclude EOA transactions)."
+                }
+            ]
+        }
+    }
+]

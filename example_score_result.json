@@ -1,0 +1,9 @@
+[
+    {
+        "task_id": "task_1",
+        "total_score":10,
+        "answer_score":1,
+        "reasoning_score":5,
+        "tool_use_score":4
+    }
+]
