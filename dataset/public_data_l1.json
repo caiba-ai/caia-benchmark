@@ -1,0 +1,272 @@
+[
+  {
+    "task_id": "89bebeca-9bfc-4163-8d7d-9ee6ebfda404",
+    "question": "Fetch the daily swap volume (USD) for the ETH/USDC 0.05 % pool on Uniswap V3 for 2025-01-02.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "9a1868b5-51a8-4a43-b7ee-8772d8861731",
+    "question": "Count the number of USDT transfers that occurred on 2025-02-01 (UTC) on Ethereum.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "94202549-4eae-4a2d-9716-d70498807ad3",
+    "question": "Return the wETH balance of the Polygon PoS bridge contract at block 19 300 000.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "0e818f27-e375-49b7-8011-94bc663ada89",
+    "question": "Give the timestamp of transaction 0x5b796ac0da57e1985743a5c65218681d6875a9414383f7af20396c47c9b92bbb on Ethereum mainnet.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "0059aec1-f8b4-42ef-8a8c-6bd778dff437",
+    "question": "Count unique wallets that interacted with the Ethereum-cyber Bridge on 2025-04-01.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "698277ab-c7d0-4ec0-b9cb-a2457ff67946",
+    "question": "How much stETH was minted on 2024-12-31?",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "553a40fb-caca-4ef0-83bb-a8fe5df46ac2",
+    "question": "Report TVL (USD) locked in Aave V3 on Ethereum at 2025-05-01 00:00 UTC.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "063864fd-3df8-441c-bfde-494f2df74b8b",
+    "question": "Calculate the share of ETH staking deposits routed via Lido vs RocketPool during 2025-02-01 to 2025-02-29.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "73b89265-8ec1-4c88-82b7-e1e1f1c7fc99",
+    "question": "Measure the increase in BTC bridged to Ethereum (WBTC mints) between 2024-11-01 and 2025-01-01.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "14533a0b-5848-41c7-9111-a96c213603a5",
+    "question": "Retrieve the block timestamp for Ethereum block 19 560 000.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "34bc4f60-31c3-4ff3-855e-a4213c6ec997",
+    "question": "Calculate daily net flows of USDC to and from the Optimism bridge for 2025-01-01 to 2025-01-07.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "71df6b1e-043b-49b2-8ef2-a3804f926b34",
+    "question": "Compute the average swap size (USD) for ETH/USDT trades on Uniswap V3 (0.3 %) on 2025-02-10.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "0eb185b1-ceaa-404a-9368-688829f5b14f",
+    "question": "What is the circulating supply of Metis at 2025-04-25?",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "851b0966-788a-42b7-8c58-4d57db4d4bbb",
+    "question": "Give the FDV of eigen at price $1.30 using supply at Ethereum block 19 420 000.",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "13f51f50-1aa0-4ae3-bbd3-11200d37576e",
+    "question": "How many Myshell tokens unlock on 2025-09-30 per the vesting schedule?",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "179b9ba2-867c-44da-a2aa-80c8e1f1a7e0",
+    "question": "Fetch the current annual inflation rate of BTC at 2025-05-01.",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "6138a932-c9f7-42db-aee0-f634d9562bd1",
+    "question": "Generate a monthly Eigen unlock schedule (tokens + USD) for 2025-01-01 to 2025-06-30.",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "af47d20b-6e7f-45fd-bf4b-acf1b9abd9e9",
+    "question": "Retrieve the official Twitter handle, docs URL, and GitHub repo link for the protocol Friend-tech.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "141ca9cb-5717-40b4-8b83-0441742fa876",
+    "question": "Detect any live airdrop or incentive campaign tweeted by @buildoncyber from 2025-05-01 to 2025-05-15; provide start date & call-to-action link.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "9c1cddec-b3e5-4c6c-b1bd-1eb992ec32cb",
+    "question": "From the last 24 h of tweets containing \u00022EigenLayer\u00022, extract the top-5 recurring comments.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "195622e8-7ed4-4278-ad89-f38ebc5be2c0",
+    "question": "Retrieve the full funding history (round, date, amount, lead investor) for Metis up to 2025-05-15.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "b4b8a1bf-f8e7-4125-a7e0-d4e7b8596f09",
+    "question": "Report weekly active users (WAU) for Uniswap V3 during 2025-05-05 to 2025-05-11.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "9233ef31-e542-496c-8f44-40b1adbffeda",
+    "question": "How many swaps occurred in the ETH/USDC 0.05 % pool on Uniswap V3 on 2025-03-02?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "f49bc2f1-1754-4fe8-aeeb-81c57d804dc4",
+    "question": "Measure total gas used by EigenLayer contracts on 2025-05-10.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "6998d19a-00dc-42b0-b2fe-92ecc183c430",
+    "question": "How many tokens were successfully minted on Pump.fun during 2025-05-20?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "4ce663e7-7038-4ddb-9e70-ef93a32b263d",
+    "question": "Find average transactions per active address on Uniswap V3 during May 2025.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "7b6a2b78-25c4-4646-a9bd-ed1e53ebce16",
+    "question": "Estimate average gas cost per transaction for CyberConnect v3 on 2024-07-20.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "6b65f331-fa31-42b6-af4f-7632ae9e7113",
+    "question": "List the top-5 dApps by DAU on Solana for 2025-05-10 to 2025-05-15.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "c2d2905c-f5c0-41c0-b3ee-57829eeabc4d",
+    "question": "What's Pump.fun DAU from 2025-05-01 to 2025-05-07?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "08106e3a-b20c-4c64-8644-3ac29c7f01fb",
+    "question": "Given the number of tokens launched on Pump.fun (Solana) on the first day of each month:\n  \u00183025-02-01 \t6 1 500 tokens\n  \u00183025-03-01 \t6 1 800 tokens\n  \u00183025-04-01 \t6 2 100 tokens\n  \u00183025-05-01 \t6 2 500 tokens\nAssuming a linear trend, estimate the calendar date on which Pump.fun on Solana will reach a cumulative total of 10 000 tokens launched.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "e8901ceb-7e30-4a31-8b5d-e7f0a01dc726",
+    "question": "Identify the token with the highest FDV/market-cap ratio among Binance Launch-Pool tokens from 2025-02-01 to 2025-05-01.",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "ff9f452b-bb4f-4b5d-9095-c2a216c907b8",
+    "question": "What is the circulating supply of CYBER on 2025-06-01?",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "0f1f8a27-f63f-4bc4-b740-858b22099c02",
+    "question": "Between Believe-launched tokens, which had the largest market-cap as of 2025-05-15?",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "3e2b4e54-0bdb-48b6-a941-6879c90238ec",
+    "question": "Find three tokens (launched H1 2025) with FDV > $1 B but mcap < $100 M; list the FDV/mcap ratios.",
+    "level": 1,
+    "category": "tokenomics"
+  },
+  {
+    "task_id": "69c2ca70-0109-40c6-9db0-9691cdb69f10",
+    "question": "Find the verified Pump.fun main contract address in the Solana docs.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "268401ff-120d-4892-8028-4f0a0802bcdf",
+    "question": "When was the CyberConnect v3 contract deployed on Ethereum (date & tx hash)?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "1b331269-4d9a-41f9-8a64-9b06e123628a",
+    "question": "List Twitter, Discord, and docs links for Sentient.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "d0227345-9f39-43cd-ab85-077f71a244de",
+    "question": "Name three competitors to the Hyperlane interoperability protocol (docs or websites).",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "5e572b87-af68-47c8-a9e6-841194d9f71c",
+    "question": "Compare LaunchLab vs Pump.fun on fees, bonding-curve type, daily token deployments (week ending 2025-05-05).",
+    "level": 1,
+    "category": "overlap"
+  },
+  {
+    "task_id": "20b69808-e826-475e-96b2-443f1f6ef508",
+    "question": "Plot the daily active users (DAU) for Myshell over the past 14 days; deliver a line chart.",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "59ffbf09-a436-4ce5-97f3-9fab470fda4a",
+    "question": "For the top-5 Pump.fun memecoins by 7-day trading volume, fetch their contract deploy dates and current Twitter follower counts; output a table.",
+    "level": 1,
+    "category": "overlap"
+  },
+  {
+    "task_id": "d7900b0e-d8ec-4866-9ef1-b0f01eecc3c4",
+    "question": "Find three Solana launchpad tokens whose FDV fell > 50 % within 7 days post-launch; list token, launch date, FDV at launch, FDV after 7 days, and main narrative source.",
+    "level": 1,
+    "category": "overlap"
+  },
+  {
+    "task_id": "f653d8cb-f0bf-4a5f-b23e-34d4282ae4c0",
+    "question": "Give the contract address and GitHub repo for the EigenLayer AVS example mentioned in their docs.",
+    "level": 1,
+    "category": "overlap"
+  },
+  {
+    "task_id": "9cab906b-9be1-48db-9443-a17f914c2dc1",
+    "question": "What was the average gas price (Gwei) in Ethereum block 19 500 000?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "7688c47f-fce0-49ba-a646-f5c6e1908f4c",
+    "question": "Return the TVL (USD) of Aave V3 on Ethereum at 2025-04-01 00:00 UTC.",
+    "level": 1,
+    "category": "onchain analysis"
+  }
+]

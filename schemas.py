@@ -77,6 +77,8 @@ class EvaluateData(BaseModel):
 class QuestionData(BaseModel):
     task_id: str
     question: str
+    level: int
+    category: str
     # tools:Optional[List[str]] = Field(description="The tools that can be used to answer the question")
 
     def to_prompt(self) -> str:
