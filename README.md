@@ -1,10 +1,10 @@
 
-# Crypto-Agentic Benchmark v0.1
+# CAIA -- A benchmark for Crypto AI Assitant
 
 > Mission – Provide an open, reproducible yardstick for measuring how well AI agents reason about, interact with, and execute on crypto-native tasks and problem sets.
 > 
 > 
-> Crypto Agentic Benchmark is aim to creating domain-specific, industry-grade evaluations that move beyond generic academic sets and reflect the realities of **crypto**.
+> CCAIA Benchmark is aim to creating domain-specific, industry-grade evaluations that move beyond generic academic sets and reflect the realities of **crypto**.
 > 
 
 ---
@@ -28,17 +28,39 @@
 | **Tokenomics Deep-Dive** | 20 | “Compute OP’s circulating supply, FDV, and annualised emission schedule as of block *N*.” | Etherscan, DefiLlama, CSV math |
 | **Project Discovery** | 30 | “Find three newly deployed restaking protocols this week and rank them by GitHub commits.” | Block-explorer, GitHub API, web search |
 
-*Format* All tasks are in `jsonl` with fields:
+*Format* All tasks are in `json` with fields:
 
 ```
 {
-  "id": "analysis_001",
-  "category": "onchain_analysis",
-  "question": "...",
-  "ground_truth": "...",
-  "expected_tool_calls": [
-    { "type": "eth_getLogs", "params": { ... } }
-  ]
+    "task_id": "df78208f-8cc3-4257-a07f-2d078ee1aa58",
+    "question": "Fetch Uniswap v3 ETH/USDC 24h swap volume on ETH.",
+    "level": 1,
+    "evaluate": {
+        "items": [
+            {
+                "target": "ANSWER",
+                "points": 1,
+                "criteria": "..."
+            },
+            {
+                "target": "REASONING",
+                "step": 1,
+                "points": 2,
+                "criteria": "..."
+            },
+            {
+                "target": "REASONING",
+                "step": 2,
+                "points": 2,
+                "criteria": "..."
+            },
+            {
+                "target": "TOOL_USE",
+                "points": 4,
+                "criteria": "..."
+            }
+        ]
+    }
 }
 
 ```
@@ -74,25 +96,8 @@ Key points:
 
 ---
 
-## 4 Code
 
-*This section will be fleshed out by engineering in a later commit.*
-
-```bash
-bash
-CopyEdit
-├── datasets/
-├── evaluator/
-│   ├── cab_harness.py      # CLI entry-point
-│   └── metrics.py
-├── examples/
-└── README.md               # ← you are here
-
-```
-
----
-
-## 5 How to Use
+## 4 How to Use
 1. Run the public questions with your assistant/agent sysmtem
 2. Collect your assistant/agent's outputs and convert to the form we expect.
 3. Run the evaluation/ Upload to our [Leaderboard on Huggingface](https://huggingface.co/spaces/cyberco/CAIA-Benchmark-Leaderboard)
