@@ -70,7 +70,7 @@ class EvaluateData(BaseModel):
     def validate_total_points(cls, items: List[EvaluateItem]) -> List[EvaluateItem]:
         total_points = sum(item.points for item in items)
         if abs(total_points - 10.0) != 0:
-            raise ValueError(f"所有评估项的权重总和必须等于10，当前总和为: {total_points}")
+            raise ValueError(f"The total weight of all evaluation items must be exactly 10. Current total: {total_points}.")
         return items
 
 
@@ -192,7 +192,6 @@ class EvaluateScore(BaseModel):
     
     @model_validator(mode='after')
     def check_totals(self):
-        # 可选：限制总分（如果业务就是固定 10 分）
         if self.total_score > 10:
             raise ValueError('total_score cannot exceed 10')
 

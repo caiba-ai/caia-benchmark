@@ -121,6 +121,13 @@ NOTE:
 
 
     async def evaluate_reasoning(self, output_answer:Answer, benchmark_item:BenchmarkItem) -> tuple[float, Optional[ReasoningEvaluateResult]]:
+        system_prompt = """You are a professional evaluator for AI assistants in the crypto domain. You need to score the assistant's reasoning ability based on the given evaluation criteria and reasoning process. Please follow these steps during evaluation:
+1. Review the reasoning steps and understand whether each step's logic is relevant to the task and helps solve the problem.
+2. If there are no explicit reasoning steps, treat tool calls as an alternative form of reasoning steps and consider the reasoning process represented by the tool usage.
+3. Assess the completeness and rigor of the reasoning chain, judging whether each step is reasonable and accurate, and whether there are logical flaws or missing steps.
+4. Consider the information references and tool calls in the reasoning process, judge whether the information sources are sufficient, whether the tool usage is appropriate, and analyze the connections and dependencies between each step in the reasoning chain.
+5. According to the evaluation criteria, give a score for each criterion, with the score ranging from 0 to the maximum points for that criterion.
+"""
         reasoning_items = [item for item in benchmark_item.evaluate.items if item.target == EvaluateTarget.REASONING]
         if not reasoning_items:
             return 0.0, None
@@ -149,7 +156,7 @@ Evaluation Rules:
             try:
                 response = await self.client.chat.completions.create(
                     model=self.model_name,
-                    messages=[{"role": "user", "content": prompt}],
+                    messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
                     **self.model_params
                 )
                 content = response.choices[0].message.content
@@ -170,6 +177,11 @@ Evaluation Rules:
         return 0.0, None
 
     async def evaluate_tool_use(self, output_answer:Answer, benchmark_item:BenchmarkItem) -> tuple[float, Optional[ToolUseEvaluateResult]]:
+        system_prompt = """You are a professional crypto AI assistant evaluator. You need to score the assistant's tools using ability according to the given criterias and the tool use output. When evaluating, you should follow the following steps:
+1. Take a brief look at the tool using, descriptions and input args, to make sure the tool using is correct/related to solving the task.
+2. Evaluate each step of the tool use to estimate the efficiency and accuracy of the tool use.
+3. Consider the continuity of tool calls: The return result of the previous tool call may affect the input arguments of the next tool call.
+"""
         tool_use_items = [item for item in benchmark_item.evaluate.items if item.target == EvaluateTarget.TOOL_USE]
         if not tool_use_items:
             return 0.0, None
@@ -192,7 +204,7 @@ Evaluation Rules:
             try:
                 response = await self.client.chat.completions.create(
                     model=self.model_name,
-                    messages=[{"role": "user", "content": prompt}],
+                    messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
                     **self.model_params
                 )
                 content = response.choices[0].message.content
@@ -214,6 +226,12 @@ Evaluation Rules:
 
     
     async def evaluate_answer(self, output_answer:Answer, benchmark_item:BenchmarkItem) -> tuple[float, Optional[AnswerEvaluateResult]]:
+        system_prompt = """You are a professional evaluator for crypto AI assistant answers. You need to score the AI assistant's final answer according to the given evaluation criteria. Please follow these steps during evaluation:
+1. Carefully read the task question and the AI assistant's final output, and determine whether the answer accurately and completely solves the task requirements and conforms to basic common sense.
+2. Check whether the facts, data, and reasoning process in the answer are correct, and whether there are logical errors, numerical errors, or fabricated facts.
+3. For specific numerical values, allow a certain range of error. If the criteria do not specify the error range, use a ±5% margin.
+4. For each evaluation criterion, give a score for each item, with the score ranging from 0 to the full score for that criterion.
+Please strictly follow the evaluation criteria to provide objective and fair scoring, and briefly explain your reasoning for the scores."""
         evaluate_items = [item for item in benchmark_item.evaluate.items if item.target == EvaluateTarget.ANSWER]
         if not evaluate_items:
             return 0.0, None
@@ -237,7 +255,7 @@ Evaluation Rules:
             try:
                 response = await self.client.chat.completions.create(
                     model=self.model_name,
-                    messages=[{"role": "user", "content": prompt}],
+                    messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
                     **self.model_params
                 )
 
