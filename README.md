@@ -4,7 +4,7 @@
 > Mission – Provide an open, reproducible yardstick for measuring how well AI agents reason about, interact with, and execute on crypto-native tasks and problem sets.
 > 
 > 
-> CCAIA Benchmark is aim to creating domain-specific, industry-grade evaluations that move beyond generic academic sets and reflect the realities of **crypto**.
+> CAIA Benchmark aims to creating domain-specific, industry-grade evaluations that move beyond generic academic sets and reflect the realities of **crypto**.
 > 
 
 ---
@@ -24,9 +24,10 @@
 
 | Suite | #Tasks | Example Prompt | Primary Tools / APIs |
 | --- | --- | --- | --- |
-| **On-Chain Analysis** | 50 | “Fetch Uniswap V3 ETH/USDC swap volume between **2024-12-01** and **2024-12-02** on Ethereum mainnet.” | JSON-RPC, subgraph, Dune |
-| **Tokenomics Deep-Dive** | 20 | “Compute OP’s circulating supply, FDV, and annualised emission schedule as of block *N*.” | Etherscan, DefiLlama, CSV math |
-| **Project Discovery** | 30 | “Find three newly deployed restaking protocols this week and rank them by GitHub commits.” | Block-explorer, GitHub API, web search |
+| **On-Chain Analysis** | 24 | “Fetch the daily swap volume (USD) for the ETH/USDC 0.05 % pool on Uniswap V3 for 2025-01-02.” | JSON-RPC, subgraph, Dune |
+| **Tokenomics Deep-Dive** | 10 | “Compute OP’s circulating supply, FDV, and annualised emission schedule as of block *N*.” | Etherscan, DefiLlama, CSV math |
+| **Project Discovery** | 7 | “Find three newly deployed restaking protocols this week and rank them by GitHub commits.” | Block-explorer, GitHub API, web search |
+| **Overlap** | 4 | “Give the contract address and GitHub repo for the EigenLayer AVS example mentioned in their docs.” | Block-explorer, GitHub API, web search |
 
 *Format* All tasks are in `json` with fields:
 
@@ -74,28 +75,27 @@ We follow a **LLM-as-Judge** (and soon *LLM-as-Jury*) approach inspired by Vals 
 Key points:
 
 1. **Scoring pipeline**
-    1. Collect reference answers & tool traces for each task.
-    2. Run candidate agent → capture *answer*, *step-level tool calls*, *arguments*, *gas*.
-    3. Ask *k* different judge LLMs to grade each dimension; take the mean.
+    1. Collect reference answers & tool traces & reasoning steps for each task.
+    2. Run candidate agent → capture *answer*, *step-level tool calls*, *arguments*, *reasoning steps*.
+    3. Ask *k* different judge LLMs to grade each dimension for three times with temperature and config; take the mean.
     4. Normalise each dimension to a 0-1 scale so suites with many tool calls don’t dominate.
 2. **Dimensions & weights (v0.1)**
     
     
     | Dimension | Weight | Notes |
     | --- | --- | --- |
-    | **Answer correctness** | 0.45 | *Exact-match* for single-truth tasks; partial credit for open-ended questions. |
-    | **Reasoning validity** | 0.25 | Judges evaluate chain-of-thought (hidden to model under test). |
-    | **Tool-use accuracy** | 0.30 | (a) Call matches intent (b) Params accurate (c) No unsafe ops |
+    | **Answer correctness** | 0.1-0.4 | *Exact-match* for single-truth tasks; partial credit for open-ended questions. |
+    | **Reasoning validity** | 0.2-0.4 | Judges evaluate chain-of-thought (hidden to model under test). |
+    | **Tool-use accuracy** | 0.2-0.4 | (a) Call matches intent (b) Params accurate (c) No unsafe ops |
+
 3. **Aggregation**
     
     *Final score* = Σ (normalised dimension × weight).
     
 
-> Full rubric lives in /docs/eval_spec.md
-> 
+> Full rubric lives in evaluator.py
 
 ---
-
 
 ## 4 How to Use
 1. Run the public questions with your assistant/agent sysmtem
