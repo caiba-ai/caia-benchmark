@@ -1,5 +1,5 @@
 
-# CAIA -- A benchmark for Crypto AI Assitant
+# CAIA - A benchmark for Crypto AI Agent
 
 > Mission – Provide an open, reproducible yardstick for measuring how well AI agents reason about, interact with, and execute on crypto-native tasks and problem sets.
 > 
