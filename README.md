@@ -8,7 +8,7 @@
 
 ## Key Takeaways
 - We conducted experiments using a simple demo-agent from [Vals.ai Finance-agent](https://github.com/vals-ai/finance-agent/tree/main) equipped with common tools (Google search, web browser). We compared several foundation LLMs and evaluated their performance on entry-level crypto analyst tasks—results are available on our [Leaderboard](https://huggingface.co/spaces/cyberco/CAIA-Benchmark-Leaderboard).
-- No models with the demo-agent framework achieve satisfactory performance as entry-level crypto analysts.
+- No models using the demo-agent framework achieve satisfactory performance as entry-level crypto analysts, with none scoring more than 40 out of 100.
 - Most models struggled with analysis and calculation tasks due to the lack of crypto-specific tools, leading to inaccurate results (numbers, addresses, tokenomics).
 - Simple agent frameworks may limit model capabilities; we encourage the use of complex and powerful agent frameworks to better challenge our benchmark.
 
