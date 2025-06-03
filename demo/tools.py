@@ -283,32 +283,32 @@ class QuickGoogleSearch(Tool):
     @retry_on_429
     async def _execute_search(self, query: str, date_range: str = "qdr:w") -> dict:
         """
-        使用Google搜索执行搜索。
+        Execute a search using Google.
 
         Args:
-            query (str): 搜索查询
-            date_range (str): 时间范围过滤器
+            query (str): The search query.
+            date_range (str): Time range filter.
 
         Returns:
-            dict: 搜索结果
+            dict: Search results.
         """
         client = AsyncSerpClient.get_instance()
         try:
             results = await client.quick_search(query, date_range)
             return results
         except Exception as e:
-            tool_logger.error(f"搜索执行失败: {str(e)}")
+            tool_logger.error(f"Search execution failed: {str(e)}")
             raise
 
     async def call_tool(self, arguments: dict) -> str:
         """
-        执行工具调用并格式化结果。
+        Execute the tool call and format the results.
 
         Args:
-            arguments (dict): 工具参数
+            arguments (dict): Tool arguments.
 
         Returns:
-            str: 格式化的搜索结果
+            str: Formatted search results.
         """
         MAX_LENGTH = 8096
         query = arguments["query"]

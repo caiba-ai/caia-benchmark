@@ -1,4 +1,3 @@
-
 # CAIA - A benchmark for Crypto AI Agent
 
 > Mission – Provide an open, reproducible yardstick for measuring how well AI agents reason about, interact with, and execute on crypto-native tasks and problem sets.
@@ -6,6 +5,13 @@
 > 
 > CAIA Benchmark aims to creating domain-specific, industry-grade evaluations that move beyond generic academic sets and reflect the realities of **crypto**.
 > 
+
+## Key Takeaways
+- We conducted experiments using a simple demo-agent from [Vals.ai Finance-agent](https://github.com/vals-ai/finance-agent/tree/main) equipped with common tools (Google search, web browser). We compared several foundation LLMs and evaluated their performance on entry-level crypto analyst tasks—results are available on our [Leaderboard](https://huggingface.co/spaces/cyberco/CAIA-Benchmark-Leaderboard).
+- No models with the demo-agent framework achieve satisfactory performance as entry-level crypto analysts.
+- Most models struggled with analysis and calculation tasks due to the lack of crypto-specific tools, leading to inaccurate results (numbers, addresses, tokenomics).
+- Simple agent frameworks may limit model capabilities; we encourage the use of complex and powerful agent frameworks to better challenge our benchmark.
+
 
 ---
 
@@ -24,10 +30,10 @@
 
 | Suite | #Tasks | Example Prompt | Primary Tools / APIs |
 | --- | --- | --- | --- |
-| **On-Chain Analysis** | 24 | “Fetch the daily swap volume (USD) for the ETH/USDC 0.05 % pool on Uniswap V3 for 2025-01-02.” | JSON-RPC, subgraph, Dune |
-| **Tokenomics Deep-Dive** | 10 | “Compute OP’s circulating supply, FDV, and annualised emission schedule as of block *N*.” | Etherscan, DefiLlama, CSV math |
-| **Project Discovery** | 7 | “Find three newly deployed restaking protocols this week and rank them by GitHub commits.” | Block-explorer, GitHub API, web search |
-| **Overlap** | 4 | “Give the contract address and GitHub repo for the EigenLayer AVS example mentioned in their docs.” | Block-explorer, GitHub API, web search |
+| **On-Chain Analysis** | 24 | "Fetch the daily swap volume (USD) for the ETH/USDC 0.05 % pool on Uniswap V3 for 2025-01-02." | JSON-RPC, subgraph, Dune |
+| **Tokenomics Deep-Dive** | 6 | "Compute OP's circulating supply, FDV, and annualised emission schedule as of block *N*." | Etherscan, DefiLlama, CSV math |
+| **Project Discovery** | 8 | "Find three newly deployed restaking protocols this week and rank them by GitHub commits." | Block-explorer, GitHub API, web search |
+| **Overlap** | 3 | "Give the contract address and GitHub repo for the EigenLayer AVS example mentioned in their docs." | Block-explorer, GitHub API, web search |
 
 *Format* All tasks are in `json` with fields:
 
@@ -70,7 +76,7 @@
 
 ## 3 Evaluation Methodology
 
-We follow a **LLM-as-Judge** (and soon *LLM-as-Jury*) approach inspired by Vals AI’s broader framework. 
+We follow a **LLM-as-Judge** (and soon *LLM-as-Jury*) approach inspired by Vals AI's broader framework. 
 
 Key points:
 
@@ -78,7 +84,7 @@ Key points:
     1. Collect reference answers & tool traces & reasoning steps for each task.
     2. Run candidate agent → capture *answer*, *step-level tool calls*, *arguments*, *reasoning steps*.
     3. Ask *k* different judge LLMs to grade each dimension for three times with temperature and config; take the mean.
-    4. Normalise each dimension to a 0-1 scale so suites with many tool calls don’t dominate.
+    4. Normalise each dimension to a 0-1 scale so suites with many tool calls don't dominate.
 2. **Dimensions & weights (v0.1)**
     
     
@@ -94,6 +100,8 @@ Key points:
     
 
 > Full rubric lives in evaluator.py
+
+Checkout our demo result on our [Leaderboard on Huggingface](https://huggingface.co/spaces/cyberco/CAIA-Benchmark-Leaderboard)
 
 ---
 
@@ -129,8 +137,6 @@ Key points:
 ```
 
 
-
-- ### If you want to test your own **Agent/Assistant**:
 
 ### Roadmap
 
