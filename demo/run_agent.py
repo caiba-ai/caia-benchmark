@@ -68,15 +68,23 @@ if __name__ == "__main__":
     import os
 
     # 加载问题数据
-    with open("dataset/public_data_l1.json", "r") as f:
+    with open("dataset/benchmark_tasks.json", "r") as f:
         questions_data = json.load(f)
     
     questions = [QuestionData(**item) for item in questions_data]
     # 提取所有问题
+    # result = asyncio.run(run_tests_parallel(
+    #     output_dir="results",
+    #     questions=questions,
+    #     model_name="volcengine/deepseek-r1-250120",
+    #     max_concurrent=5,
+    #     save_results=True,
+    # ))
     result = asyncio.run(run_tests_parallel(
         output_dir="results",
         questions=questions,
-        model_name="openai/o3-2025-04-16",
+        model_name="openrouter/anthropic/claude-opus-4",
         max_concurrent=5,
         save_results=True,
     ))
+

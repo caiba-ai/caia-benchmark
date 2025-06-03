@@ -9,7 +9,7 @@ async def get_agent(model_name: str, parameters: dict, *args, **kwargs):
     max_turns = parameters.get("max_turns", 50)
     available_tools = {
         "quick_search_using_google": QuickGoogleSearch,
-        "retrieve_information": RetrieveInformation,
+        # "retrieve_information": RetrieveInformation,
         "read_webpage_content_by_urls": ReadWebpageContent,
     }
 

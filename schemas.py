@@ -14,7 +14,7 @@ class ToolUse(BaseModel):
     tool_name:str
     tool_description: str
     tool_input:str
-    tool_output: str
+    tool_output: Optional[str] = None
 
     def to_prompt(self, ignore_output:bool = False) -> str:
         prompt = f"Tool Name: {self.tool_name}\n"
@@ -90,9 +90,13 @@ class QuestionData(BaseModel):
 
 class BenchmarkItem(BaseModel):
     task_id: str
+    level:Optional[int] = 1
+    category:str
     question: str = Field(description="The question to be answered")
     # answer: Answer = Field(description="The agent system output")
     evaluate: EvaluateData = Field(description="The evaluation result")
+
+    
 
 
 
@@ -160,6 +164,9 @@ class EvaluateScore(BaseModel):
 
     evaluate_detail:Optional[str] = Field(description="The detail of the evaluation")
     model_name: str
+    task_id:str
+    level:int
+    category:str
 
 
     # @field_validator('total_score')

@@ -1,6 +1,8 @@
+import asyncio
 import json
 import os
 from abc import ABC, abstractmethod
+import traceback
 from typing import Any
 
 import backoff
@@ -10,7 +12,7 @@ from openai import AsyncOpenAI
 from openai.types.chat import ChatCompletion
 from demo.utils import is_token_limit_error
 from anthropic.types import Message
-
+import httpx
 provider_args = {
     "openai": {"api_key": os.getenv("OPENAI_API_KEY")},
     "google": {
@@ -41,6 +43,14 @@ provider_args = {
         "api_key": os.getenv("COHERE_API_KEY"),
         "base_url": "https://api.cohere.ai/compatibility/v1/",
     },
+    "volcengine": {
+        "api_key": os.getenv("DEEPSEEK_API_KEY"),
+        "base_url": "https://ark.cn-beijing.volces.com/api/v3/",
+    },
+    "openrouter":{
+        "api_key": os.getenv("OPENROUTER_API_KEY"),
+        "base_url": "https://openrouter.ai/api/v1/",
+    }
 }
 
 llm_logger = get_logger(__name__)
@@ -99,7 +109,10 @@ class GeneralLLM(LLM):
         self.max_tokens = max_tokens
         if provider == "anthropic":
             params = self.get_provider_args()
-            self.anthropic_client = AsyncAnthropic(api_key=params["api_key"])
+            proxy_url = "http://127.0.0.1:7890"
+    
+            http_client = httpx.AsyncClient(proxy=proxy_url)
+            self.anthropic_client = AsyncAnthropic(api_key=params["api_key"], http_client=http_client)
 
     async def safe_chat(
         self,
@@ -149,12 +162,14 @@ class GeneralLLM(LLM):
             return await self.chat(messages, tools)
         except Exception as e:
             print(f"Error: {e}")
+            print(traceback.format_exc())
             raise
 
     async def chat(
         self, messages: list[dict[str, Any]], tools: list[dict[str, Any]] = []
     ) -> ChatCompletion|Message:
         if self.provider == "anthropic":
+            await asyncio.sleep(10)
             if self.model_name == "claude-3-7-sonnet-20250219-thinking":
                 model_name = "claude-3-7-sonnet-20250219"
                 if len(tools) > 0:
@@ -336,11 +351,23 @@ class GeneralLLM(LLM):
         return messages
 
     def convert_usage(self, usage: dict[str, Any]) -> dict[str, Any]:
+        if not usage:
+            return {
+                "prompt_tokens": 0,
+                "completion_tokens": 0,
+                "total_tokens": 0,
+            }
         if self.provider == "anthropic":
             return {
                 "prompt_tokens": usage.input_tokens,
                 "completion_tokens": usage.output_tokens,
                 "total_tokens": usage.input_tokens + usage.output_tokens,
+            }
+        elif self.provider == 'openrouter':
+            return {
+                "prompt_tokens": usage.prompt_tokens,
+                "completion_tokens": usage.completion_tokens,
+                "total_tokens": usage.prompt_tokens + usage.completion_tokens,
             }
         else:
             return {
