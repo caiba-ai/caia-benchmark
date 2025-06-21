@@ -1,0 +1,3 @@
+[submodule "internal"]
+	path = internal
+	url = git@github.com:cyberconnecthq/caia_internal.git

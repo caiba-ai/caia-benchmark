@@ -1,8 +1,11 @@
-import json
 import asyncio
+import json
 from statistics import mean
+
 from evaluator import Evaluator, ensemble_evaluate
 from schemas import AgentOutputItem, Answer, BenchmarkItem, EvaluateScore
+
+input = "eval_results_0621_17:09:41"
 
 
 def load_llm_config(config_path: str = "llm_config.json") -> dict:
@@ -40,14 +43,16 @@ async def main():
     llm_configs = load_llm_config()
     parse_llm_config = llm_configs["parse_llm_config"]
     evaluate_llm_configs = llm_configs["evaluate_llm_configs"]
-    #load agent output dataset
-    agent_output_dataset = load_agent_output_dataset("converted_agent_outputs/odin_result_10.json")
-    #load evaluate dataset
+    # load agent output dataset
+    agent_output_dataset = load_agent_output_dataset(
+        f"inputs/eval_results/{input}.json"
+    )
+    # load evaluate dataset
     evaluator_list: list[Evaluator] = []
     for evaluate_llm_config in evaluate_llm_configs:
         for _ in range(3):
             evaluator = Evaluator(
-                dataset_path="internal/benchmark_data_v4.json",
+                dataset_path="internal/dataset/benchmark_data_v4.json",
                 parse_model=parse_llm_config["model_name"],
                 parse_model_api_key=parse_llm_config.get("api_key", None),
                 parse_model_base_url=parse_llm_config.get("base_url", None),
@@ -144,7 +149,7 @@ async def main():
         import os
 
         # Define CSV filename
-        csv_filename = "odin_eval_10.csv"
+        csv_filename = f"results/{input}.csv"
         # Check if file does not exist to determine if header should be written
         file_exists = os.path.isfile(csv_filename)
 

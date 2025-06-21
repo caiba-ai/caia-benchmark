@@ -1,8 +1,9 @@
 .vscode
 .env
+.venv
 llm_config.json
-internal/
-results/
+
+
 logs/
 
 *.pyc
@@ -16,3 +17,5 @@ __pycache__/
 .DS_Store
 scripts/
 converted_agent_outputs/
+inputs/
+results/
