@@ -6,7 +6,7 @@ from demo.tools import GoogleWebSearch, ParseHtmlPage, RetrieveInformation,ReadW
 
 
 async def get_agent(model_name: str, parameters: dict, *args, **kwargs):
-    max_turns = parameters.get("max_turns", 50)
+    max_turns = parameters.get("max_turns", 20)
     available_tools = {
         "quick_search_using_google": QuickGoogleSearch,
         # "retrieve_information": RetrieveInformation,

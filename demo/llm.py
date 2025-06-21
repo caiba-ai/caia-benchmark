@@ -211,7 +211,8 @@ class GeneralLLM(LLM):
             "o1-2024-12-17",
             "o3-2025-04-16",
             "o4-mini-2025-04-16",
-            "gpt-4.1"
+            "gpt-4.1",
+            "o3"
         ]:
             if len(tools) > 0:
                 return await self.client.chat.completions.create(

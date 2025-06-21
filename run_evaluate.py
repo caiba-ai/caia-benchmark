@@ -40,16 +40,14 @@ async def main():
     llm_configs = load_llm_config()
     parse_llm_config = llm_configs["parse_llm_config"]
     evaluate_llm_configs = llm_configs["evaluate_llm_configs"]
-    # load agent output dataset
-    agent_output_dataset = load_agent_output_dataset(
-        "converted_agent_outputs/converted_results_test_claude_4_opus.json"
-    )
-    # load evaluate dataset
+    #load agent output dataset
+    agent_output_dataset = load_agent_output_dataset("converted_agent_outputs/odin_result_10.json")
+    #load evaluate dataset
     evaluator_list: list[Evaluator] = []
     for evaluate_llm_config in evaluate_llm_configs:
         for _ in range(3):
             evaluator = Evaluator(
-                dataset_path="internal/benchmark_data_v3.json",
+                dataset_path="internal/benchmark_data_v4.json",
                 parse_model=parse_llm_config["model_name"],
                 parse_model_api_key=parse_llm_config.get("api_key", None),
                 parse_model_base_url=parse_llm_config.get("base_url", None),
@@ -146,7 +144,7 @@ async def main():
         import os
 
         # Define CSV filename
-        csv_filename = "evaluate_results_claude_4_opus_2.csv"
+        csv_filename = "odin_eval_10.csv"
         # Check if file does not exist to determine if header should be written
         file_exists = os.path.isfile(csv_filename)
 

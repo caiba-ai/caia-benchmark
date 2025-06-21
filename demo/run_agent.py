@@ -89,16 +89,15 @@ if __name__ == "__main__":
     # result = asyncio.run(run_tests_parallel(
     #     output_dir="results",
     #     questions=questions,
-    #     model_name="volcengine/deepseek-r1-250120",
+    #     model_name="volcengine/deepseek-r1-250528",
     #     max_concurrent=5,
     #     save_results=True,
     # ))
-    result = asyncio.run(
-        run_tests_parallel(
-            output_dir="results",
-            questions=questions,
-            model_name="openrouter/anthropic/claude-opus-4",
-            max_concurrent=5,
-            save_results=True,
-        )
-    )
+    result = asyncio.run(run_tests_parallel(
+        output_dir="results",
+        questions=questions,
+        model_name="openrouter/google/gemini-2.5-pro-preview-06-05",
+        max_concurrent=5,
+        save_results=True,
+    ))
+

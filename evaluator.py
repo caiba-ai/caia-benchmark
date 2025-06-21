@@ -90,7 +90,12 @@ class Evaluator:
             content = json.load(f)
             benchmark_items = []
             for item in content:
-                benchmark_item = BenchmarkItem(**item)
+                try:
+                    benchmark_item = BenchmarkItem(**item)
+                except Exception as e:
+                    print(f"Error loading benchmark item: {e}")
+                    print(item)
+
                 benchmark_items.append(benchmark_item)
             self.benchmark_data = benchmark_items
             return benchmark_items
@@ -160,6 +165,10 @@ NOTE:
 5. According to the evaluation criteria, give a score for each criterion, with the score ranging from 0 to the maximum points for that criterion.
 
 Today's date is {datetime.now().strftime("%Y-%m-%d")}
+
+NOTE:
+1. The reasoning step might not directly include the detailed parameters. If required parameters not included in the reasoning steps, you should return to the tool_use to find the related params.
+2. The reasoning process should allow for trial and error and adjustments; it is not required to be completely correct in one attempt. Should not focus on the single step but the whole picture of the reasoning process
 """
         reasoning_items = [
             item

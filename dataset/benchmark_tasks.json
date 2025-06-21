@@ -244,5 +244,119 @@
     "question": "Return the TVL in USD (include borrow amount) of Aave V3 on Ethereum at 2025-04-01 00:00 UTC.",
     "level": 1,
     "category": "onchain analysis"
+  },
+  {
+    "task_id": "e1234567-89ab-cdef-0123-456789abcdef",
+    "question": "EigenLayer Restaked-ETH Share by LSDFi Protocol As of 2025-06-10 00:00 UTC, determine each of Lido, EtherFi, Renzo, Swell, and Puffer's share (%) of total restaked ETH on EigenLayer, and compute their seven-day net inflows (ETH).",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "f2345678-9abc-def0-1234-56789abcdef0",
+    "question": "What is the top 5 holder address of the token dogwifhat as of Date 2025-06-12",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "g3456789-abcd-ef01-2345-6789abcdef01",
+    "question": "How many unique wallets had at least one ERC-721 transfer of Bored Ape Yacht Club tokens during calendar Q4 2024?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "h4567890-bcde-f012-3456-789abcdef012",
+    "question": "How is EigenLayer doing after TGE? Please evaluate in terms of TVL",
+    "level": 1,
+    "category": "trend analysis"
+  },
+  {
+    "task_id": "i5678901-cdef-0123-4567-89abcdef0123",
+    "question": "What's the contract ABI of the Uniswap v3?",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "j6789012-def0-1234-5678-9abcdef01234",
+    "question": "how has zora dapp performed after zora token tge",
+    "level": 1,
+    "category": "trend analysis"
+  },
+  {
+    "task_id": "k7890123-ef01-2345-6789-abcdef012345",
+    "question": "Calculate the total holdings of BTC on Binance as of June 11 2025.",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "l8901234-f012-3456-789a-bcdef0123456",
+    "question": "which pool has the highest trading volume on Meteora on the day of June 6?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "m9012345-0123-4567-89ab-cdef01234567",
+    "question": "How much did Donut in Crypto Raise? and who are the leading investors?",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "n0123456-1234-5678-9abc-def012345678",
+    "question": "How much money was locked in Katana through Krates as of June 12th",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "o1234567-2345-6789-abcd-ef0123456789",
+    "question": "What can we say about Orca exchange on Solana from January 2025 to June 2025",
+    "level": 1,
+    "category": "trend analysis"
+  },
+  {
+    "task_id": "p2345678-3456-789a-bcde-f0123456789a",
+    "question": "What's pendle's router contract address?",
+    "level": 1,
+    "category": "project discovery"
+  },
+  {
+    "task_id": "q3456789-4567-89ab-cdef-0123456789ab",
+    "question": "what's the swap rate of PEPE/ETH on Uniswap V2 on the ETH block height 22636495?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "r4567890-5678-9abc-def0-123456789abc",
+    "question": "What's the Uniswap V3's router contract address",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "s5678901-6789-abcd-ef01-23456789abcd",
+    "question": "If I want to stake ETH to LIDO, which contract address should I interact with?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "t6789012-789a-bcde-f012-3456789abcde",
+    "question": "What's the mint address of Official TRUMP on SOLANA?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "u7890123-89ab-cdef-0123-456789abcdef",
+    "question": "What's the USDC/WETH pool price of the Uniswap 0.05 USDC/WETH pool on the mainnet block height 22636495?",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "v8901234-9abc-def0-1234-56789abcdef0",
+    "question": "What's the ABI of Across Protocol's function \"depositV3\"",
+    "level": 1,
+    "category": "onchain analysis"
+  },
+  {
+    "task_id": "w9012345-abcd-ef01-2345-6789abcdef0",
+    "question": "What's the token address of WETH on BASE chain?",
+    "level": 1,
+    "category": "onchain analysis"
   }
 ]
