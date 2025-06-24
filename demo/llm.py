@@ -50,7 +50,11 @@ provider_args = {
     "openrouter":{
         "api_key": os.getenv("OPENROUTER_API_KEY"),
         "base_url": "https://openrouter.ai/api/v1/",
-    }
+    },
+    "fireworks": {
+        "api_key": os.getenv("FIREWORKS_API_KEY"),
+        "base_url": "https://api.fireworks.ai/inference/v1/",
+    },
 }
 
 llm_logger = get_logger(__name__)
@@ -61,8 +65,7 @@ class LLM(ABC):
         self.provider = provider
         self.model_name = model_name
         params = self.get_provider_args()
-        if self.provider == "fireworks":
-            self.model_name = "accounts/fireworks/models/" + self.model_name
+       
         self.client = AsyncOpenAI(
             api_key=params["api_key"], base_url=params.get("base_url")
         )

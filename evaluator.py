@@ -5,20 +5,16 @@ import traceback
 from typing import List, Optional, Type, TypeVar
 from tenacity import (
     retry,
-    retry_if_exception_type,
     stop_after_attempt,
     wait_exponential,
 )
 from pydantic import BaseModel
 from schemas import (
     Answer,
-    EvaluateData,
-    QuestionData,
     BenchmarkItem,
     EvaluateTarget,
     AnswerEvaluateResult,
     ReasoningEvaluateResult,
-    ReasoningStep,
     ToolUse,
     ToolUseEvaluateResult,
     EvaluateScore,
@@ -378,40 +374,44 @@ Evaluation Rules:
                 continue
         return 0.0, None
 
-    async def a_evaluate(self, task_id: str, answer: Answer) -> EvaluateScore | None:
-        import asyncio
-
+    async def a_evaluate(self, task_id: str, answer: Answer, only_answer: bool = False) -> EvaluateScore | None:
+        await self.load_validate_data()
         to_evaluate_item = [
             item for item in self.benchmark_data if item.task_id == task_id
         ]
         if not to_evaluate_item:
             return None
         to_evaluate_item = to_evaluate_item[0]
-        tasks = [
-            self.evaluate_answer(answer, to_evaluate_item),
-            self.evaluate_reasoning(answer, to_evaluate_item),
-            self.evaluate_tool_use(answer, to_evaluate_item),
-        ]
-        [
-            (answer_score, answer_evaulate_result),
-            (reasoning_score, reasoning_evaulate_result),
-            (tool_use_score, tool_use_evaulate_result),
-        ] = await asyncio.gather(*tasks)
+        if only_answer:
+            answer_score, answer_evaulate_result = await self.evaluate_answer(answer, to_evaluate_item)
+            reasoning_evaulate_result = None
+            tool_use_evaulate_result = None
+        else:
+            tasks = [
+                self.evaluate_answer(answer, to_evaluate_item),
+                self.evaluate_reasoning(answer, to_evaluate_item),
+                self.evaluate_tool_use(answer, to_evaluate_item),
+            ] 
+            [
+                (answer_score, answer_evaulate_result),
+                (reasoning_score, reasoning_evaulate_result),
+                (tool_use_score, tool_use_evaulate_result),
+            ] = await asyncio.gather(*tasks)
 
         analysis = await self.analyze_evaulate_result(
-            answer_evaulate_result,
-            reasoning_evaulate_result,
-            tool_use_evaulate_result,
-            to_evaluate_item,
+            answer_evaulate_result = answer_evaulate_result,
+            reasoning_evaulate_result = reasoning_evaulate_result,
+            tool_use_evaulate_result = tool_use_evaulate_result,
+            to_evaluate_item = to_evaluate_item,
         )
         return analysis
 
     async def analyze_evaulate_result(
         self,
         answer_evaulate_result: Optional[AnswerEvaluateResult],
-        reasoning_evaulate_result: Optional[ReasoningEvaluateResult],
-        tool_use_evaulate_result: Optional[ToolUseEvaluateResult],
         to_evaluate_item: BenchmarkItem,
+        reasoning_evaulate_result: Optional[ReasoningEvaluateResult] = None,
+        tool_use_evaulate_result: Optional[ToolUseEvaluateResult] = None,
     ) -> EvaluateScore:
         """
         Analyze the evaluate result and give the analysis.

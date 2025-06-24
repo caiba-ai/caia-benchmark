@@ -86,6 +86,14 @@ if __name__ == "__main__":
 
     questions = [QuestionData(**item) for item in questions_data]
     # Extract all questions
+    result = asyncio.run(run_tests_parallel(
+        output_dir="results",
+        questions=questions,
+        model_name="fireworks/accounts/sentientfoundation/models/dobby-unhinged-llama-3-3-70b-new",
+        max_concurrent=5,
+        save_results=True,
+    ))
+
     # result = asyncio.run(run_tests_parallel(
     #     output_dir="results",
     #     questions=questions,
@@ -93,11 +101,18 @@ if __name__ == "__main__":
     #     max_concurrent=5,
     #     save_results=True,
     # ))
-    result = asyncio.run(run_tests_parallel(
-        output_dir="results",
-        questions=questions,
-        model_name="openrouter/google/gemini-2.5-pro-preview-06-05",
-        max_concurrent=5,
-        save_results=True,
-    ))
+    # result = asyncio.run(run_tests_parallel(
+    #     output_dir="results",
+    #     questions=questions,
+    #     model_name="openai/o4-mini-2025-04-16",
+    #     max_concurrent=5,
+    #     save_results=True,
+    # ))
 
+    # result = asyncio.run(run_tests_parallel(
+    #     output_dir="results",
+    #     questions=questions,
+    #     model_name="openrouter/anthropic/claude-4-sonnet-20250522",
+    #     max_concurrent=5,
+    #     save_results=True,
+    # ))

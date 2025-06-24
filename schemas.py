@@ -40,8 +40,8 @@ class ReasoningStep(BaseModel):
 
 class Answer(BaseModel):
     answer: str
-    reasoning_steps: List[ReasoningStep]
-    function_calls: List[ToolUse]
+    reasoning_steps: Optional[List[ReasoningStep]] = None
+    function_calls: Optional[List[ToolUse]] = None
     # sources: List[str]
 
     def to_prompt(self) -> str:
@@ -141,8 +141,8 @@ class ToolUseEvaluateResult(BaseModel):
 class AgentOutputItem(BaseModel):
     task_id: str
     answer: str
-    tool_use_list: List[ToolUse]
-    reasoning_list: List[ReasoningStep]
+    tool_use_list:Optional[List[ToolUse]] = None
+    reasoning_list:Optional[List[ReasoningStep]] = None
 
     def to_prompt(self) -> str:
         prompt = f"Task ID: {self.task_id}\n"

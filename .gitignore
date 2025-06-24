@@ -17,5 +17,6 @@ __pycache__/
 .DS_Store
 scripts/
 converted_agent_outputs/
+eval_results/
 inputs/
 results/
