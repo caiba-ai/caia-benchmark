@@ -1,5 +1,6 @@
 
 import json
+import asyncio
 from typing import List, Optional
 from schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore
 from evaluator import Evaluator, ensemble_evaluate
@@ -61,7 +62,7 @@ class BenchmarkEvaluator:
             return [item for item in self.benchmark_data if item.question == question][0]
         return None
 
-    async def a_evaluate(self, agent_output_item: AgentOutputItem) -> tuple[float, list[EvaluateScore]]:
+    async def a_evaluate(self, agent_output_item: AgentOutputItem, only_answer: bool = False) -> tuple[float, list[EvaluateScore]]:
         self.init_evaluator()
         # 构造Answer对象
         answer = Answer(
@@ -76,5 +77,18 @@ class BenchmarkEvaluator:
         if not to_evaluate_item:
             return 0, []
         # 调用ensemble_evaluate
-        score, results = await ensemble_evaluate(self.evaluator_list, answer, to_evaluate_item)
+        score, results = await ensemble_evaluate(self.evaluator_list, answer, to_evaluate_item, only_answer)
         return score, results
+    
+        # INSERT_YOUR_CODE
+    async def a_batch_evaluate(self, agent_output_items: list[AgentOutputItem],  only_answer: bool = False) -> list[tuple[float, list[EvaluateScore]]]:
+        """
+        批量并发评估 agent_output_items 列表
+        返回每个item的(score, results)元组列表
+        """
+        self.init_evaluator()
+        tasks = []
+        for agent_output_item in agent_output_items:
+            tasks.append(self.a_evaluate(agent_output_item, only_answer=only_answer))
+        results = await asyncio.gather(*tasks)
+        return results

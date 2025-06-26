@@ -538,13 +538,13 @@ Evaluation Rules:
 
 
 async def ensemble_evaluate(
-    evaulator_list: list[Evaluator], answer: Answer, to_evaluate_item: BenchmarkItem
+    evaulator_list: list[Evaluator], answer: Answer, to_evaluate_item: BenchmarkItem, only_answer: bool = False
 ) -> tuple[float, list[EvaluateScore]]:
     for evaluator in evaulator_list:
         await evaluator.load_validate_data()
     results = await asyncio.gather(
         *[
-            evaluator.a_evaluate(to_evaluate_item.task_id, answer)
+            evaluator.a_evaluate(to_evaluate_item.task_id, answer, only_answer)
             for evaluator in evaulator_list
         ]
     )
