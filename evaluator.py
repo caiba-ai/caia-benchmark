@@ -153,6 +153,8 @@ NOTE:
     async def evaluate_reasoning(
         self, output_answer: Answer, benchmark_item: BenchmarkItem
     ) -> tuple[float, Optional[ReasoningEvaluateResult]]:
+        if not output_answer.reasoning_steps and not output_answer.function_calls:
+            return 0.0, None
         system_prompt = f"""You are a professional evaluator for AI assistants in the crypto domain. You need to score the assistant's reasoning ability based on the given evaluation criteria and reasoning process. Please follow these steps during evaluation:
 1. Review the reasoning steps and understand whether each step's logic is relevant to the task and helps solve the problem.
 2. If there are no explicit reasoning steps, treat tool calls as an alternative form of reasoning steps and consider the reasoning process represented by the tool usage.
@@ -175,12 +177,15 @@ NOTE:
             return 0.0, None
         prompt = f"""
 Task ID: {benchmark_item.task_id}
-Question: {benchmark_item.question}
-To be evaluated Reasoning Steps:
+Question: {benchmark_item.question}"""
+        if output_answer.reasoning_steps:
+            prompt += f"""To be evaluated Reasoning Steps:
 ```
 {"\n".join([step.to_prompt() for step in output_answer.reasoning_steps])}
 ```
-
+"""
+        if output_answer.function_calls:
+            prompt += f"""
 In addition, the following function calls are also part of the reasoning steps. The choose of the tool use and the arguments should be taken into account:
 ```
 {"\n".join([step.to_prompt(ignore_output=True) for step in output_answer.function_calls])}
@@ -230,6 +235,8 @@ Evaluation Rules:
     async def evaluate_tool_use(
         self, output_answer: Answer, benchmark_item: BenchmarkItem
     ) -> tuple[float, Optional[ToolUseEvaluateResult]]:
+        if not output_answer.function_calls:
+            return 0.0, None
         system_prompt = f"""You are a professional crypto AI assistant evaluator. You need to score the assistant's tools using ability according to the given criterias and the tool use output. When evaluating, you should follow the following steps:
 1. Take a brief look at the tool using, descriptions and input args, to make sure the tool using is correct/related to solving the task.
 2. Evaluate each step of the tool use to estimate the efficiency and accuracy of the tool use.
