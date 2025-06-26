@@ -71,7 +71,7 @@ class BenchmarkEvaluator:
         )
         to_evaluate_item = self.find_eval_item(
             task_id= agent_output_item.task_id if agent_output_item.task_id else None,
-            question= agent_output_item.qeustion if agent_output_item.qeustion else None
+            question= agent_output_item.question if agent_output_item.question else None
         )
         if not to_evaluate_item:
             return 0, []

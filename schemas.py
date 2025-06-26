@@ -140,7 +140,7 @@ class ToolUseEvaluateResult(BaseModel):
 
 class AgentOutputItem(BaseModel):
     task_id: Optional[str] = None
-    qeustion:Optional[str] = None
+    question:Optional[str] = None
     answer: str
     tool_use_list:Optional[List[ToolUse]] = None
     reasoning_list:Optional[List[ReasoningStep]] = None
