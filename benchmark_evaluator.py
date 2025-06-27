@@ -2,7 +2,7 @@
 import json
 import asyncio
 from typing import List, Optional
-from schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore
+from schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore, Usage
 from evaluator import Evaluator, ensemble_evaluate
 
 class BenchmarkEvaluator:
@@ -62,7 +62,7 @@ class BenchmarkEvaluator:
             return [item for item in self.benchmark_data if item.question == question][0]
         return None
 
-    async def a_evaluate(self, agent_output_item: AgentOutputItem, only_answer: bool = False) -> tuple[float, list[EvaluateScore]]:
+    async def a_evaluate(self, agent_output_item: AgentOutputItem, only_answer: bool = False) -> tuple[float, list[EvaluateScore], Usage | None]:
         self.init_evaluator()
         # 构造Answer对象
         answer = Answer(
@@ -75,13 +75,13 @@ class BenchmarkEvaluator:
             question= agent_output_item.question if agent_output_item.question else None
         )
         if not to_evaluate_item:
-            return 0, []
+            return 0, [], agent_output_item.usage
         # 调用ensemble_evaluate
         score, results = await ensemble_evaluate(self.evaluator_list, answer, to_evaluate_item, only_answer)
-        return score, results
+        return score, results, agent_output_item.usage
     
         # INSERT_YOUR_CODE
-    async def a_batch_evaluate(self, agent_output_items: list[AgentOutputItem],  only_answer: bool = False) -> list[tuple[float, list[EvaluateScore]]]:
+    async def a_batch_evaluate(self, agent_output_items: list[AgentOutputItem],  only_answer: bool = False) -> list[tuple[float, list[EvaluateScore], Usage | None]]:
         """
         批量并发评估 agent_output_items 列表
         返回每个item的(score, results)元组列表
