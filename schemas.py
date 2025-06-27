@@ -137,6 +137,11 @@ class ToolUseEvaluateResult(BaseModel):
         return "\n".join([item.__str__() for item in self.items])
 
 
+class Usage(BaseModel):
+    completion_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    time_cost: float = 0
 
 class AgentOutputItem(BaseModel):
     task_id: Optional[str] = None
@@ -144,6 +149,7 @@ class AgentOutputItem(BaseModel):
     answer: str
     tool_use_list:Optional[List[ToolUse]] = None
     reasoning_list:Optional[List[ReasoningStep]] = None
+    usage: Optional[Usage] = None
 
     def to_prompt(self) -> str:
         prompt = f"Task ID: {self.task_id}\n"
