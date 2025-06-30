@@ -7,8 +7,8 @@ from .evaluator import Evaluator, ensemble_evaluate
 
 class BenchmarkEvaluator:
     def __init__(self, llm_config_path: str = "llm_config.json", dataset_path: str = "internal/dataset/benchmark_data_v4.json"):
-        self.llm_config_path = os.path.relpath(llm_config_path)
-        self.dataset_path = os.path.relpath(dataset_path)
+        self.llm_config_path = llm_config_path
+        self.dataset_path = dataset_path
         self.evaluator_list: List[Evaluator] = []
         self.benchmark_data: List[BenchmarkItem] = self.init_benchmark_data()
 
