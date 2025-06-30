@@ -1,4 +1,4 @@
-
+import os
 import json
 import asyncio
 from typing import List, Optional
@@ -7,8 +7,8 @@ from .evaluator import Evaluator, ensemble_evaluate
 
 class BenchmarkEvaluator:
     def __init__(self, llm_config_path: str = "llm_config.json", dataset_path: str = "internal/dataset/benchmark_data_v4.json"):
-        self.llm_config_path = llm_config_path
-        self.dataset_path = dataset_path
+        self.llm_config_path = os.path.relpath(llm_config_path)
+        self.dataset_path = os.path.relpath(dataset_path)
         self.evaluator_list: List[Evaluator] = []
         self.benchmark_data: List[BenchmarkItem] = self.init_benchmark_data()
 
@@ -39,8 +39,6 @@ class BenchmarkEvaluator:
         return evaluator_list
     
     def init_benchmark_data(self) -> List[BenchmarkItem]:
-        if self.benchmark_data:
-            return self.benchmark_data
         with open(self.dataset_path, "r") as f:
             content = json.load(f)
             benchmark_items = []
@@ -52,7 +50,6 @@ class BenchmarkEvaluator:
                     print(item)
 
                 benchmark_items.append(benchmark_item)
-            self.benchmark_data = benchmark_items
             return benchmark_items
     
     def find_eval_item(self, task_id:Optional[str] = None, question:Optional[str] = None) -> BenchmarkItem | None:
