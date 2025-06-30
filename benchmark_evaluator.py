@@ -5,9 +5,34 @@ from typing import List, Optional
 from .schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore, Usage
 from .evaluator import Evaluator, ensemble_evaluate
 
+
+evaluator_llm_configs =  [
+        {
+            "model_name": "o3-2025-04-16",
+            "api_key": os.getenv("OPENAI_API_KEY", None),
+            "model_params": {
+                "reasoning_effort":"medium"
+            }
+        },
+        {
+            "model_name": "gpt-4.1",
+            "api_key": os.getenv("OPENAI_API_KEY", None),
+            "model_params": {
+                "temperature": 0.2
+            }
+        },
+        {
+            "model_name": "deepseek-r1-250528",
+            "api_key": os.getenv("DEEPSEEK_API_KEY", None),
+            "base_url": os.getenv("DEEPSEEK_BASE_URL", None),
+            "model_params": {
+                "max_tokens": 16000
+            }
+        }
+    ]
+
 class BenchmarkEvaluator:
-    def __init__(self, llm_config_path: str = "llm_config.json", dataset_path: str = "internal/dataset/benchmark_data_v4.json"):
-        self.llm_config_path = llm_config_path
+    def __init__(self, dataset_path: str = "internal/dataset/benchmark_data_v4.json"):
         self.dataset_path = dataset_path
         self.evaluator_list: List[Evaluator] = []
         self.benchmark_data: List[BenchmarkItem] = self.init_benchmark_data()
@@ -15,23 +40,18 @@ class BenchmarkEvaluator:
     def init_evaluator(self) -> List[Evaluator]:
         if self.evaluator_list:
             return self.evaluator_list
-        # 加载llm配置
-        with open(self.llm_config_path, "r", encoding="utf-8") as f:
-            llm_configs = json.load(f)
-        parse_llm_config = llm_configs["parse_llm_config"]
-        evaluate_llm_configs = llm_configs["evaluate_llm_configs"]
         # 初始化多个evaluator
         evaluator_list: List[Evaluator] = []
-        for evaluate_llm_config in evaluate_llm_configs:
+        for evaluate_llm_config in evaluator_llm_configs:
             for _ in range(3):
                 evaluator = Evaluator(
                     dataset_path=self.dataset_path,
-                    parse_model=parse_llm_config["model_name"],
-                    parse_model_api_key=parse_llm_config.get("api_key", None),
-                    parse_model_base_url=parse_llm_config.get("base_url", None),
+                    parse_model="gpt-4.1-mini-2025-04-14",
+                    parse_model_api_key=os.getenv("OPENAI_API_KEY", None),
+                    parse_model_base_url=None,
                     api_key=evaluate_llm_config.get("api_key", None),
                     model_name=evaluate_llm_config["model_name"],
-                    base_url=evaluate_llm_config.get("base_url", None),
+                    base_url=evaluate_llm_config.get("base_url", None) if evaluate_llm_config.get("base_url", None) else None,
                     **evaluate_llm_config.get("model_params", {}),
                 )
                 evaluator_list.append(evaluator)
