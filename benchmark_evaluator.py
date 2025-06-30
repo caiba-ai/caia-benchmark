@@ -2,8 +2,8 @@
 import json
 import asyncio
 from typing import List, Optional
-from schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore, Usage
-from evaluator import Evaluator, ensemble_evaluate
+from .schemas import BenchmarkItem, AgentOutputItem, Answer, EvaluateScore, Usage
+from .evaluator import Evaluator, ensemble_evaluate
 
 class BenchmarkEvaluator:
     def __init__(self, llm_config_path: str = "llm_config.json", dataset_path: str = "internal/dataset/benchmark_data_v4.json"):

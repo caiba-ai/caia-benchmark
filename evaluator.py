@@ -9,7 +9,7 @@ from tenacity import (
     wait_exponential,
 )
 from pydantic import BaseModel
-from schemas import (
+from .schemas import (
     Answer,
     BenchmarkItem,
     EvaluateTarget,
@@ -20,7 +20,7 @@ from schemas import (
     EvaluateScore,
 )
 from openai import AsyncClient
-from utils import count_tokens, truncate_text
+from .utils import count_tokens, truncate_text
 
 
 T = TypeVar("T", bound=BaseModel)
